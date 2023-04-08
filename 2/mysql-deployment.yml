@@ -38,4 +38,3 @@ spec:
         - name: usermanagement-dbcreation-script
           configMap:
             name: usermanagement-dbcreation-script
-            
