@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: ingress-nginxapp1
   labels:
-    app: app1-nginxa
+    app: app1-nginx
   annotations:
     alb.ingress.kubernetes.io/load-balancer-name: app1ingress
     alb.ingress.kubernetes.io/scheme: internet-facing
@@ -17,19 +17,18 @@ metadata:
     alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
 spec:
   ingressClassName: my-aws-ingress-class
-  defaultBackend:
-    service:
-      name: api-nginx-nodeport-service
-      port:
-        number: 80
-  # rules:
-  # - host: <Host>
-  #   http:
-  #     paths:
-  #     - pathType: Prefix
-  #       path: "/"
-  #       backend:
-  #         service:
-  #           name: <Service>
-  #           port: 
-  #             number: <Port>
+  # defaultBackend:
+  #   service:
+  #     name: api-nginx-nodeport-service
+  #     port:
+  #       number: 80
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: app1-nginx-nodeport-service
+            port: 
+              number: 80
